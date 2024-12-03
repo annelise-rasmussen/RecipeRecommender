@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ titleText if titleText else "Default Title" }}</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #E7F2E9; /* Soft green background */
+            color: #333333; /* Dark neutral text */
+        }
+        nav {
+            background-color: #2E5636; /* Deep green navbar */
+        }
+        .navbar-brand {
+            font-family: 'Cursive', sans-serif;
+            font-size: 1.5rem;
+            color: #E7F2E9 !important; /* Match background for contrast */
+        }
+        .nav-link {
+            color: #E7F2E9 !important;
+        }
+        .nav-link:hover {
+            color: #C3D9C9 !important; /* Slightly lighter green hover effect */
+        }
+        .container {
+            padding-top: 2rem;
+        }
+        .container h1 {
+            font-family: 'Cursive', sans-serif;
+            font-size: 2.5rem;
+            color: #2E5636; /* Deep green for headings */
+            text-align: center;
+        }
+        .form-inline {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .form-inline input[type="text"] {
+            width: 300px;
+        }
+        .btn {
+            background-color: #C3D9C9; /* Muted pastel buttons */
+            border: none;
+            color: #2E5636; /* Deep green text */
+        }
+        .btn:hover {
+            background-color: #A8C0AC; /* Slightly darker green hover effect */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="{{ url_for('home') }}">Gluten-Free Baking and Cooking</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('fav_websites') }}">Favorite Websites</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('fav_recipes') }}">Favorite Recipes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('recipe_search') }}">Recipe Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('ingredient_substitutions') }}" class="button-link">Ingredient Substitutions</a>
+                </li>
+            </ul>        
+        </div> 
+    </nav>
+
+    <div class="container mt-4">
+        {% if bodyText %}
+            {{ bodyText|safe }}
+        {% endif %}
+
+        <!-- Main Content Block for Child Templates -->
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

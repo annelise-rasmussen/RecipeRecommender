@@ -1,0 +1,12 @@
+{% extends "template.html" %}
+
+{% block title %}Home - Gluten-Free Baking and Cooking{% endblock %}
+
+{% block content %}
+<h1>Welcome to Gluten-Free Baking/Cooking Favs!</h1>
+<p>Click the links below to explore:</p>
+<ul>
+    <li><a href="{{ url_for('fav_websites') }}">Favorite Websites</a></li>
+    <li><a href="{{ url_for('fav_recipes') }}">Favorite Recipes</a></li>
+</ul>
+{% endblock %}

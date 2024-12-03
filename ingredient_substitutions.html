@@ -1,0 +1,32 @@
+{% extends "template.html" %}
+
+{% block title %}Ingredient Substitutions{% endblock %}
+
+{% block content %}
+    
+	<h1>Ingredient Substitutions</h1>
+<br>
+    <p>Here are some common dairy substitutions:</p>
+    <ul>
+        <li>Milk: Use almond milk, coconut milk, soy milk, or oat milk as a replacement. I use coconut milk for baking</li>
+        <li>Butter: Substitute with coconut oil, olive oil, or margarine. I use Imperial brand margarine for baking</li>
+        <li>Yogurt: Try soy yogurt, coconut yogurt. I use So Delicious unsweeetened yogurt in baking or sauces.</li>
+        <li>Cheese: You can use nutritional yeast, cashew cheese, or vegan cheese alternatives.<br>I am not personally a fan of dairy free cheese. Vegan Cream Cheese is made pretty well </li>
+        <li>Heavy Cream: Replace with coconut cream or cashew cream.</li>
+    </ul>
+<br>
+    <hr>
+
+    <h2>Need More Advice?</h2>
+    <form method="POST" action="{{ url_for('ingredient_substitutions') }}">
+        <input type="text" name="query" placeholder="Ask about a substitution..." class="form-control mb-3" value="{{ query }}">
+        <button type="submit" class="btn btn-primary">Get Advice</button>
+    </form>
+<br>
+    {% if openai_response %}
+        <div class="mt-4">
+            <h3>Advice from the AI:</h3>
+            <p>{{ openai_response }}</p>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ titleText }}</title>
+</head>
+<body>
+    <h1>{{ titleText }}</h1>
+    <h2>Ingredients</h2>
+    <ul>
+        {% for ingredient in ingredients %}
+        <li>{{ ingredient }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Instructions</h2>
+    <ol>
+        {% for instruction in instructions %}
+        <li>{{ instruction }}</li>
+        {% endfor %}
+    </ol>
+
+    <a href="{{ url_for('fav_recipes') }}">Back to Favorite Recipes</a>
+</body>
+</html>

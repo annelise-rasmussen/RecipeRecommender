@@ -1,0 +1,82 @@
+{% extends "template.html" %}
+
+{% block title %}Recipe Recommender{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Recipe Recommender</h1>
+
+    <!-- Centered Search Form -->
+    <form method="GET" action="{{ url_for('recipe_search') }}" class="form-inline d-flex flex-column align-items-center mt-4">
+        <!-- Search Bar -->
+        <div class="form-group mb-3 w-50">
+            <label for="query-input" class="sr-only">Search</label>
+            <input type="text" id="query-input" name="query" class="form-control form-control-sm w-100" placeholder="Search for a recipe..." value="{{ query }}">
+        </div>
+
+        <!-- Cuisine Type Dropdown -->
+        <div class="form-group mb-3 w-50">
+            <label for="cuisine" class="sr-only">Cuisine Type</label>
+            <select id="cuisine" name="cuisine" class="form-control form-control-sm w-100">
+                <option value="">-- Any Cuisine --</option>
+                {% for option in cuisines %}
+                <option value="{{ option }}" {% if selected_cuisine == option %}selected{% endif %}>{{ option }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Complexity Score Dropdown -->
+        <div class="form-group mb-3 w-50">
+            <label for="complexity" class="sr-only">Complexity</label>
+            <select id="complexity" name="complexity" class="form-control form-control-sm w-100">
+                <option value="">-- Any Complexity --</option>
+                <option value="Low" {% if selected_complexity == "Low" %}selected{% endif %}>Low</option>
+                <option value="Medium" {% if selected_complexity == "Medium" %}selected{% endif %}>Medium</option>
+                <option value="High" {% if selected_complexity == "High" %}selected{% endif %}>High</option>
+            </select>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-sm">Search</button>
+        </div>
+    </form>
+
+    <!-- Display Recommendations -->
+    {% if recommendations %}
+        <h2 class="mt-4 text-center">You Might Like:</h2>
+        <ul class="list-group">
+            {% for recommendation in recommendations %}
+                <li class="list-group-item">
+                    <a href="{{ recommendation['Source_URL'] }}" target="_blank">{{ recommendation['Title'] }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <!-- Display Search Results -->
+    {% if results %}
+        <h2 class="mt-4 text-center">Search Results:</h2>
+        <ul class="list-group">
+            {% for result in results %}
+                <li class="list-group-item">
+                    <a href="{{ result['Source_URL'] }}" target="_blank">{{ result['Title'] }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <!-- Display "No Results Found" Message -->
+    {% if show_no_results %}
+        <p class="text-center mt-4">No results found. Please try a different search.</p>
+    {% endif %}
+{% endblock %}
+
+<!-- JavaScript to Clear the Search Field -->
+{% block scripts %}
+<script>
+    function clearSearch() {
+        // Clear the search input field
+        document.getElementById('query-input').value = '';
+    }
+</script>
+{% endblock %}
